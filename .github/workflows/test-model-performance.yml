@@ -27,9 +27,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest numpy scikit-learn huggingface_hub joblib
 
-      - name: Log in to Hugging Face
-        run: |
-          hf auth login --token $HF_TOKEN --add-to-git-credential 
+      - name: Set up Hugging Face Token
+          env:
+            HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          run: |
+            python -c "from huggingface_hub import whoami; print(whoami())"
+
 
       - name: Run model performance tests
         run: |
