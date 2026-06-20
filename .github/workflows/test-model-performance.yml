@@ -1,8 +1,11 @@
 name: Test Model Performance
 
-on:[push]
-    #    paths:
-    #    - 'mlech02/**'
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 
 jobs:
   test:
