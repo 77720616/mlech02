@@ -1,0 +1,30 @@
+name: Test Model Performance
+
+on:
+  push:
+    paths:
+      - 'mlech02/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest numpy scikit-learn huggingface_hub joblib
+
+      - name: Run model performance tests
+        run: |
+          pytest mlech02/testing/test_model_performance.py -v
