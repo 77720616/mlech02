@@ -27,6 +27,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest numpy scikit-learn huggingface_hub joblib
 
+      - name: Log in to Hugging Face
+        run: |
+          huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+
       - name: Run model performance tests
         run: |
           pytest testing/test_model_performance.py -v
