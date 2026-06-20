@@ -29,7 +29,7 @@ jobs:
 
       - name: Log in to Hugging Face
         run: |
-          huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+          hf auth login --token $HF_TOKEN --add-to-git-credential 
 
       - name: Run model performance tests
         run: |
